@@ -84,4 +84,15 @@ public class StringAccumulatorImplTest {
 		}
 	}
 
+	/**
+	 * Validates the negative input
+	 * 
+	 * @throws InvalidInputException
+	 */
+	@Test(expected = InvalidInputException.class)
+	public void testAddNegativeInput() throws InvalidInputException {
+		stringAccumulator.add("-1,2,3");
+		stringAccumulator.add("1000,2,-3");
+	}
+
 }

@@ -3,7 +3,10 @@
  */
 package com.sample.application.accumulator.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 import com.sample.application.accumulator.Accumulator;
 import com.sample.application.accumulator.exceptions.InvalidInputException;
@@ -32,13 +35,26 @@ public class StringAccumulatorImpl implements Accumulator<String> {
 			throw new InvalidInputException("new lines at the end is NOT allowed");
 		}
 
-		return Arrays.stream(numbers.split(",")).mapToInt(n -> {
+		List<String> negativeValues = new ArrayList<String>();
+
+		IntStream intStream = Arrays.stream(numbers.split(",")).mapToInt(n -> {
+			// Negative input check
+			if (Predicates.NEGATIVE_VALUE.test(n.trim())) {
+				negativeValues.add(n);
+				return 0;
+			}
 			// Numbers bigger than 1000 should be ignored,
-			if (Predicates.GIGGER_THAN_1000.test(Integer.parseInt(n.trim()))) {
+			if (Predicates.BIGGER_THAN_1000.test(Integer.parseInt(n.trim()))) {
 				return 0;
 			}
 			return Integer.parseInt(n.trim());
-		}).sum();
+		});
+
+		int sum = intStream.sum();
+		if (negativeValues.size() > 0) {
+			throw new InvalidInputException("negatives not allowed");
+		}
+		return sum;
 	}
 
 }

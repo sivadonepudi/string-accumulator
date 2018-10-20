@@ -35,6 +35,7 @@ public class StringAccumulator {
 				input = inputScanner.nextLine();
 			} catch (InvalidInputException e) {
 				out.println(e.getMessage());
+				input = inputScanner.nextLine();
 			}
 		}
 		inputScanner.close();
