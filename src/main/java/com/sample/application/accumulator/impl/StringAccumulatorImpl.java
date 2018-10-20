@@ -32,7 +32,13 @@ public class StringAccumulatorImpl implements Accumulator<String> {
 			throw new InvalidInputException("new lines at the end is NOT allowed");
 		}
 
-		return Arrays.stream(numbers.split(",")).mapToInt(n -> Integer.parseInt(n.trim())).sum();
+		return Arrays.stream(numbers.split(",")).mapToInt(n -> {
+			// Numbers bigger than 1000 should be ignored,
+			if (Predicates.GIGGER_THAN_1000.test(Integer.parseInt(n.trim()))) {
+				return 0;
+			}
+			return Integer.parseInt(n.trim());
+		}).sum();
 	}
 
 }

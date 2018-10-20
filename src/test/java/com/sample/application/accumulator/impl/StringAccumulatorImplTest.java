@@ -76,6 +76,9 @@ public class StringAccumulatorImplTest {
 		try {
 			assertThat(stringAccumulator.add("1,2,3"), is(6));
 			assertThat(stringAccumulator.add("1, 2, 3"), is(6));
+			assertThat(stringAccumulator.add("1, 2, 3, 1001"), is(6));
+			assertThat(stringAccumulator.add("100100"), is(0));
+			assertThat(stringAccumulator.add("1000"), is(1000));
 		} catch (InvalidInputException e) {
 			fail();
 		}
