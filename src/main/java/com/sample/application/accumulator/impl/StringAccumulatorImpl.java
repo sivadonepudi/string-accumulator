@@ -3,6 +3,8 @@
  */
 package com.sample.application.accumulator.impl;
 
+import java.util.Arrays;
+
 import com.sample.application.accumulator.Accumulator;
 import com.sample.application.accumulator.exceptions.InvalidInputException;
 import com.sample.application.accumulator.validator.Predicates;
@@ -29,7 +31,8 @@ public class StringAccumulatorImpl implements Accumulator<String> {
 		if (Predicates.ENDS_WITH_NEW_LINE.test(numbers)) {
 			throw new InvalidInputException("new lines at the end is NOT allowed");
 		}
-		return 0;
+
+		return Arrays.stream(numbers.split(",")).mapToInt(n -> Integer.parseInt(n.trim())).sum();
 	}
 
 }

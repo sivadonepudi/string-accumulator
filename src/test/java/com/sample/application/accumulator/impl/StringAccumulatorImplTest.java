@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import com.sample.application.accumulator.Accumulator;
 import com.sample.application.accumulator.exceptions.InvalidInputException;
-import com.sample.application.accumulator.impl.StringAccumulatorImpl;
 
 /**
  * @author sidonepudi
@@ -55,14 +54,30 @@ public class StringAccumulatorImplTest {
 		stringAccumulator.add("		\n");
 	}
 
-	// @Test
+	/**
+	 * Validates single value input
+	 */
+
+	@Test
 	public void testAddOneParameter() {
 		try {
 			assertThat(stringAccumulator.add("1"), is(1));
 			assertThat(stringAccumulator.add("999"), is(999));
 		} catch (InvalidInputException e) {
 			fail();
-			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Validates sum, space included among values
+	 */
+	@Test
+	public void testAdd() {
+		try {
+			assertThat(stringAccumulator.add("1,2,3"), is(6));
+			assertThat(stringAccumulator.add("1, 2, 3"), is(6));
+		} catch (InvalidInputException e) {
+			fail();
 		}
 	}
 
