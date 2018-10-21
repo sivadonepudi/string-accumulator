@@ -32,9 +32,11 @@ public class StringAccumulator {
 		while (!exitCommands.contains(input)) {
 			try {
 				out.println("Sum:" + accumulator.add(input));
+				out.print("Enter the input:");
 				input = inputScanner.nextLine();
 			} catch (InvalidInputException e) {
 				out.println(e.getMessage());
+				out.print("Enter the input:");
 				input = inputScanner.nextLine();
 			}
 		}

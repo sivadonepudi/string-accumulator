@@ -52,6 +52,7 @@ public class StringAccumulatorImplTest {
 		stringAccumulator.add("4\n");
 		stringAccumulator.add("4, 3, 4\n");
 		stringAccumulator.add("		\n");
+		stringAccumulator.add("2,4\\n");
 	}
 
 	/**

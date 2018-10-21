@@ -1,3 +1,4 @@
 #!/bin/bash
 #echo "JAVA_HOME":$JAVA_HOME
+#mvn clean install -f ../pom.xml
 java -jar ../target/string-accumulator-0.0.1-SNAPSHOT.jar 
