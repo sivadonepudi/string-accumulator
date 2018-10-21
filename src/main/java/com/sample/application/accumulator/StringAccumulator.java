@@ -13,7 +13,8 @@ import com.sample.application.accumulator.exceptions.InvalidInputException;
 import com.sample.application.accumulator.impl.StringAccumulatorImpl;
 
 /**
- * Implementation class for StringAccumulator
+ * Main application class, accepts the input from command line and computes the
+ * sum
  * 
  * @author sidonepudi
  *

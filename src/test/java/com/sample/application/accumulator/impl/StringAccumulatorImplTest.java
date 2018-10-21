@@ -8,7 +8,9 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import com.sample.application.accumulator.Accumulator;
 import com.sample.application.accumulator.exceptions.InvalidInputException;
@@ -94,6 +96,49 @@ public class StringAccumulatorImplTest {
 	public void testAddNegativeInput() throws InvalidInputException {
 		stringAccumulator.add("-1,2,3");
 		stringAccumulator.add("1000,2,-3");
+	}
+
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
+
+	/**
+	 * Validates the negative input exception message
+	 * 
+	 * @throws InvalidInputException
+	 */
+	@Test
+	public void testAddNegativeInputExceptionMessage() throws InvalidInputException {
+		expectedException.expect(InvalidInputException.class);
+		expectedException.expectMessage("negatives not allowed: -5");
+		stringAccumulator.add("-5,2,3");
+	}
+	
+	/**
+	 * Validates the negative input exception message
+	 * 
+	 * @throws InvalidInputException
+	 */
+	@Test
+	public void testAddMultipleNegativeInputExceptionMessage() throws InvalidInputException {
+		expectedException.expect(InvalidInputException.class);
+		expectedException.expectMessage("negatives not allowed: -5, -1000");
+		stringAccumulator.add("-5,2,3\n-1000");
+	}
+
+	/**
+	 * Validates sum, space included among values
+	 */
+	@Test
+	public void testDelimiters() {
+		try {
+			assertThat(stringAccumulator.add("1,2\n3"), is(6));
+			assertThat(stringAccumulator.add("1, 2, 3"), is(6));
+			assertThat(stringAccumulator.add("//***\\n1***2***3"), is(6));
+			assertThat(stringAccumulator.add("//***\\n1***2***3***5555"), is(6));
+			assertThat(stringAccumulator.add("//*|%\\n1*2%3"), is(6));
+		} catch (InvalidInputException e) {
+			fail();
+		}
 	}
 
 }
