@@ -22,6 +22,9 @@ import com.sample.application.accumulator.exceptions.InvalidInputException;
 public class StringAccumulatorImplTest {
 	private Accumulator<String> stringAccumulator;
 
+	@Rule
+	public final ExpectedException expectedException = ExpectedException.none();
+
 	@Before
 	public void init() {
 		stringAccumulator = new StringAccumulatorImpl();
@@ -55,6 +58,18 @@ public class StringAccumulatorImplTest {
 		stringAccumulator.add("4, 3, 4\n");
 		stringAccumulator.add("		\n");
 		stringAccumulator.add("2,4\\n");
+	}
+
+	/**
+	 * Validates the input data ending with \n
+	 * 
+	 * @throws InvalidInputException
+	 */
+	@Test
+	public void testAddEndsWithNewLineExceptionMessage() throws InvalidInputException {
+		expectedException.expect(InvalidInputException.class);
+		expectedException.expectMessage("delimiter, \n is NOT allowed at the end");
+		stringAccumulator.add("4\n");
 	}
 
 	/**
@@ -98,9 +113,6 @@ public class StringAccumulatorImplTest {
 		stringAccumulator.add("1000,2,-3");
 	}
 
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
-
 	/**
 	 * Validates the negative input exception message
 	 * 
@@ -112,7 +124,7 @@ public class StringAccumulatorImplTest {
 		expectedException.expectMessage("negatives not allowed: -5");
 		stringAccumulator.add("-5,2,3");
 	}
-	
+
 	/**
 	 * Validates the negative input exception message
 	 * 

@@ -27,7 +27,7 @@ public class StringAccumulatorImpl implements Accumulator<String> {
 			return 0;
 		}
 		if (Predicates.ENDS_WITH_NEW_LINE.test(numbers)) {
-			throw new InvalidInputException("new lines at the end is NOT allowed");
+			throw new InvalidInputException("delimiter, \n is NOT allowed at the end");
 		}
 
 		StringBuilder negativeValues = new StringBuilder();
@@ -50,7 +50,7 @@ public class StringAccumulatorImpl implements Accumulator<String> {
 		// If there is at least one negative number
 		if (negativeValues.length() > 0) {
 			throw new InvalidInputException("negatives not allowed: "
-					+ negativeValues.deleteCharAt(negativeValues.lastIndexOf(",")).toString());
+					+ negativeValues.deleteCharAt(negativeValues.lastIndexOf(",")).toString().trim());
 		}
 		return sum;
 	}

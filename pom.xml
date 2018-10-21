@@ -5,12 +5,13 @@
 	<artifactId>string-accumulator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>string calculator </name>
-	<description>string calculator </description>
+	<description>string calculator computes the sum of given input</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.junit>4.12</version.junit>
 		<version.apache.commons>3.7</version.apache.commons>
+		<version.mockito>2.8.9</version.mockito>
 	</properties>
 
 	<dependencies>
@@ -23,6 +24,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${version.junit}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${version.mockito}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
