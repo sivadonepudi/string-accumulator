@@ -38,8 +38,8 @@ public class PredicatesTest {
 
 	@Test
 	public void testNegativeValue() {
-		assertThat(Predicates.NEGATIVE_VALUE.test("1001"), is(Boolean.FALSE));
-		assertThat(Predicates.NEGATIVE_VALUE.test("-1001"), is(Boolean.TRUE));
+		assertThat(Predicates.NEGATIVE_VALUE.test(1001), is(Boolean.FALSE));
+		assertThat(Predicates.NEGATIVE_VALUE.test(-1001), is(Boolean.TRUE));
 	}
 
 	@Test
@@ -47,16 +47,6 @@ public class PredicatesTest {
 		assertThat(Predicates.ENDS_WITH_NEW_LINE.test("1001\n"), is(Boolean.TRUE));
 		assertThat(Predicates.ENDS_WITH_NEW_LINE.test("1001\n\n\n"), is(Boolean.TRUE));
 		assertThat(Predicates.ENDS_WITH_NEW_LINE.test("1001\\n"), is(Boolean.TRUE));
-	}
-
-	@Test
-	public void testColon() {
-		assertThat(Predicates.COLON.test("'1000'"), is(Boolean.TRUE));
-		assertThat(Predicates.COLON.test("\'1000'"), is(Boolean.TRUE));
-		assertThat(Predicates.COLON.test("\"1000'"), is(Boolean.TRUE));
-		assertThat(Predicates.COLON.test("\\\"1000'"), is(Boolean.TRUE));
-		assertThat(Predicates.COLON.test("1000"), is(Boolean.FALSE));
-		assertThat(Predicates.COLON.test("-1000"), is(Boolean.FALSE));
 	}
 
 }
